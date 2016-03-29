@@ -17,15 +17,15 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-
-
-
-
-
+    dif = X * theta - y;
+    s = X' * dif;
+    theta = theta - alpha / m * s;
 
     % ============================================================
 
-    % Save the cost J in every iteration    
+    % Save the cost J in every iteration
+    J = computeCost(X, y, theta);
+    % printf("J: %f\n", J);
     J_history(iter) = computeCost(X, y, theta);
 
 end
