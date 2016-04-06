@@ -37,8 +37,12 @@ grad = zeros(size(theta));
 %
 
 
+h = sigmoid(X * theta); % m+1 x 1
+% printf("h: %d x %d\n", size(h, 1), size(h, 2));
+t = theta(2:size(theta,1));
+J = 1/m * (-y' * log(h) -  (1 .- y)' * log(1 .- h)) + lambda/(2*m) * t' * t;
 
-
+grad = 1/m * X' * (h-y) + lambda / m * [0; t];
 
 
 
