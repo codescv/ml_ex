@@ -39,7 +39,7 @@ m = size(X, 1);
 sel = randperm(size(X, 1));
 sel = sel(1:100);
 
-displayData(X(sel, :));
+%displayData(X(sel, :));
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -83,6 +83,7 @@ fprintf(['Cost at parameters (loaded from ex4weights): %f '...
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
+
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
 %  continue to implement the regularization with the cost.
@@ -120,6 +121,7 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 
+
 %% ================ Part 6: Initializing Pameters ================
 %  In this part of the exercise, you will be starting to implment a two
 %  layer neural network that classifies digits. You will start by
@@ -148,6 +150,8 @@ checkNNGradients;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
+
+return;
 
 
 %% =============== Part 8: Implement Regularization ===============
