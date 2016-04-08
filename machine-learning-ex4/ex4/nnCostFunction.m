@@ -76,7 +76,10 @@ c = -y .* log(h) - (ones(size(y)) - y) .* log(ones(size(h))-h);
 
 J = sum(sum(c)) / m;
 
+t1 = Theta1(:,2:end);
+t2 = Theta2(:,2:end);
 
+J += (sum(sum(t1 .* t1)) + sum(sum(t2 .* t2))) * lambda / (2*m);
 
 
 
