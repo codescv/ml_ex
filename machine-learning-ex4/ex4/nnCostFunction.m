@@ -62,10 +62,19 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+x = [ones(m,1) X]';
+z1 = Theta1 * x;
+a1 = sigmoid(z1);
 
+a1 = [ones(1, size(a1, 2)); a1];
+z2 = Theta2 * a1;
+h = sigmoid(z2);
 
+y = eye(10)(:, y);
 
+c = -y .* log(h) - (ones(size(y)) - y) .* log(ones(size(h))-h);
 
+J = sum(sum(c)) / m;
 
 
 
