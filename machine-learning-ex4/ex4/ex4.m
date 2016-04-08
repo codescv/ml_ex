@@ -151,8 +151,6 @@ checkNNGradients;
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
-return;
-
 
 %% =============== Part 8: Implement Regularization ===============
 %  Once your backpropagation implementation is correct, you should now

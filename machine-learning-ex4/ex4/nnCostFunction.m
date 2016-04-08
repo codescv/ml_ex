@@ -70,7 +70,7 @@ a1 = [ones(1, size(a1, 2)); a1];
 z2 = Theta2 * a1;
 h = sigmoid(z2);
 
-y = eye(10)(:, y);
+y = eye(num_labels)(:, y);
 
 c = -y .* log(h) - (ones(size(y)) - y) .* log(ones(size(h))-h);
 
@@ -82,22 +82,39 @@ t2 = Theta2(:,2:end);
 J += (sum(sum(t1 .* t1)) + sum(sum(t2 .* t2))) * lambda / (2*m);
 
 
-
-
-
-
-
-
-
-
-
-
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
+Delta2 = zeros(size(y,1), hidden_layer_size+1);
+Delta1 = zeros(hidden_layer_size, size(X,2)+1);
+
+for t = 1:m
+  a1 = [1; X(t,:)'];
+  z2 = Theta1 * a1;
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+
+  delta3 = a3 - y(:, t);
+  
+  delta2 = Theta2' * delta3 .* sigmoidGradient([0;z2]);
+  delta2 = delta2(2:end);
+
+  Delta2 = Delta2 + delta3 * a2';
+  Delta1 = Delta1 + delta2 * a1';
+ 
+  t1 = [zeros(size(Theta1,1),1) Theta1(:, 2:end)];
+  t2 = [zeros(size(Theta2,1),1) Theta2(:, 2:end)];
+
+  Theta1_grad = (Delta1 + lambda * t1) / m; 
+  Theta2_grad = (Delta2 + lambda * t2) / m;
+
+endfor
+
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 end
